@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://fonts/font_32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/font_16.tres" type="DynamicFont" id=2]
+[ext_resource path="res://art/slider_grabber.png" type="Texture" id=3]
+
+[sub_resource type="StyleBoxLine" id=1]
+content_margin_top = 0.0
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[node name="Options" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -120.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 1 )
+text = "Options"
+align = 2
+
+[node name="Music" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -120.0
+margin_top = 48.0
+margin_right = -8.0
+margin_bottom = 65.0
+custom_fonts/font = ExtResource( 2 )
+text = "Music Volume"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="Music"]
+margin_top = 16.0
+margin_right = 112.0
+margin_bottom = 32.0
+focus_mode = 0
+custom_icons/grabber_disabled = ExtResource( 3 )
+custom_icons/grabber_highlight = ExtResource( 3 )
+custom_icons/grabber = ExtResource( 3 )
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 3 )
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sound" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -120.0
+margin_top = 96.0
+margin_right = -8.0
+margin_bottom = 113.0
+custom_fonts/font = ExtResource( 2 )
+text = "Sound Volume"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="Sound"]
+margin_top = 16.0
+margin_right = 112.0
+margin_bottom = 32.0
+focus_mode = 0
+custom_icons/grabber_disabled = ExtResource( 3 )
+custom_icons/grabber_highlight = ExtResource( 3 )
+custom_icons/grabber = ExtResource( 3 )
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 3 )
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

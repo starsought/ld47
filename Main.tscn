@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=2]
+[ext_resource path="res://Splash.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Options.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Music.gd" type="Script" id=5]
+[ext_resource path="res://art/background.png" type="Texture" id=6]
+[ext_resource path="res://audio/kick_2.ogg" type="AudioStream" id=7]
+[ext_resource path="res://fonts/font_16.tres" type="DynamicFont" id=8]
+[ext_resource path="res://art/plants.png" type="Texture" id=10]
+[ext_resource path="res://Spawner.gd" type="Script" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 12 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4, 8 )
+
+[node name="Main" type="Node"]
+script = ExtResource( 2 )
+
+[node name="Music" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="Kick2" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 7 )
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Options" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="OptionButton" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -24.0
+custom_styles/focus = SubResource( 1 )
+custom_fonts/font = ExtResource( 8 )
+text = "Options"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Splash" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="Spawners" type="Node2D" parent="."]
+position = Vector2( 256, 192 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 11 )
+
+[node name="Cactus" type="Sprite" parent="Spawners"]
+position = Vector2( 12, -12 )
+texture = ExtResource( 10 )
+hframes = 2
+
+[node name="Box" type="Area2D" parent="Spawners/Cactus"]
+
+[node name="Collision" type="CollisionShape2D" parent="Spawners/Cactus/Box"]
+shape = SubResource( 2 )
+
+[node name="Flower" type="Sprite" parent="Spawners"]
+position = Vector2( 24, -12 )
+texture = ExtResource( 10 )
+hframes = 2
+frame = 1
+
+[node name="Box" type="Area2D" parent="Spawners/Flower"]
+position = Vector2( 0, 4 )
+
+[node name="Collision" type="CollisionShape2D" parent="Spawners/Flower/Box"]
+shape = SubResource( 3 )
