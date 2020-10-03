@@ -3,20 +3,33 @@ extends Node
 # I think we need to store all the music here and deal with signals
 # so we don't have tons of overlapping stuff
 
+var time = 0.0
+
 const MIN_DB = -90.0
 const MAX_DB = 0.0
 
 var music_volume = 1.0
 
 onready var layers = {
-	'kick_2': $Kick2,
-	'chord_1': $Chord1,
+	'kick': $Kick,
+	'cowbell': $Cowbell,
+	'shaker': $Shaker,
+	'chord': $Chord,
+	'ding': $Ding,
+	'bass': $Bass,
+	'clap': $Clap,
 }
 
 var muted = {
-	'kick_2': true,
-	'chord_1': true,
+	'kick': true,
+	'cowbell': true,
+	'shaker': true,
+	'chord': true,
+	'ding': true,
+	'bass': true,
+	'clap': true,
 }
+
 
 
 func play():
@@ -49,3 +62,6 @@ func set_music_volume(pc):
 # convert volume percentage to decibels
 func db(percent):  # percent should be in [0.0, 1.0]
 	return lerp(MIN_DB, MAX_DB, pow(percent, 0.25))
+
+func _process(delta):
+	time += delta

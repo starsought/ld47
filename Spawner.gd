@@ -1,32 +1,42 @@
 extends Node2D
 
-const CACTUS = preload("res://BigCactus.tscn")
-const FLOWER = preload("res://SkinnyFlower.tscn")
+const PLANT = preload("res://Plant.tscn")
 
 onready var Main = $".."
+onready var spawn_nodes = {
+	'cactus': $Cactus,
+	'flower': $Flower,
+	'borb'  : $Borb,
+	'snake' : $Snake,
+	'herbs' : $Herbs,
+}
+
 
 func _ready():
-	$Cactus/Box.connect("input_event", self, "handle_cactus")
-	$Flower/Box.connect("input_event", self, "handle_flower")
+	$Cactus/Box.connect("input_event", self, "handle", ["cactus"])
+	$Flower/Box.connect("input_event", self, "handle", ["flower"])
+	$Borb/Box.connect("input_event", self, "handle", ["borb"])
+	$Snake/Box.connect("input_event", self, "handle", ["snake"])
+	$Herbs/Box.connect("input_event", self, "handle", ["herbs"])
 
-func handle_cactus(viewport, event, shape_index):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and event.pressed:
-			spawn_new_plant(CACTUS, $Cactus.global_position)
-			Main.add_plant('cactus')
+func handle(v, input, i, type):
+	if input is InputEventMouseButton:
+		if input.button_index == BUTTON_LEFT and input.pressed:
+			spawn_new_plant(type)
 
-# How do we generalize this?
-func handle_flower(viewport, event, shape_index):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and event.pressed:
-			spawn_new_plant(FLOWER, $Flower.global_position)
-			Main.add_plant('flower')
-
-func spawn_new_plant(scene, initial_position):
+func spawn_new_plant(type):
+	var scene = PLANT
 	var new_plant = scene.instance()
-	new_plant.position = initial_position
+	Main.add_child(new_plant)  # triggers _ready()
+	new_plant.apply_type(type)
+	new_plant.position = spawn_nodes[type].global_position
 	new_plant.being_dragged = true
 	new_plant.drag_point_offset = get_viewport().get_mouse_position() - new_plant.position
-	# probably need to keep these in a subnode
-	# so they don't end up on top of everything else
-	Main.add_child(new_plant)
+	new_plant.get_node("Plink").play()
+	Main.add_plant_to_arrangement(new_plant)
+	
+func disable_spawner(type):
+	spawn_nodes[type].hide()
+
+func enable_spawner(type):
+	spawn_nodes[type].show()

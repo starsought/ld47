@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="ld47"
 run/main_scene="res://Main.tscn"
 
+[autoload]
+
+Timing="*res://Timing.gd"
+
 [display]
 
 window/size/width=384

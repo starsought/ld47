@@ -17,29 +17,13 @@ func toggle_options():
 	else:
 		$OptionButton.text = "Options"
 
-var spawned = {
-	'cactus': false,
-	'flower': false,
-}
+func add_plant_to_arrangement(plant):
+	$Music.unmute(plant.track)
+	$Spawner.disable_spawner(plant.type)
 
-func add_plant(type):
-	match type:
-		'cactus':
-			spawned['cactus'] = true
-			$Music.unmute('kick_2')
-			$Spawner/Cactus.hide()
-		'flower':
-			spawned['flower'] = true
-			$Music.unmute('chord_1')
-			$Spawner/Flower.hide()
+func move_plant_within_arrangement(plant):
+	pass
 
-func remove_plant(type):
-	match type:
-		'cactus':
-			spawned['cactus'] = false
-			$Music.mute('kick_2')
-			$Spawner/Cactus.show()
-		'flower':
-			spawned['flower'] = false
-			$Music.mute('chord_1')
-			$Spawner/Flower.show()
+func remove_plant_from_arrangement(plant):
+	$Music.mute(plant.track)
+	$Spawner.enable_spawner(plant.type)
