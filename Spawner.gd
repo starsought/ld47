@@ -13,12 +13,14 @@ func handle_cactus(viewport, event, shape_index):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			spawn_new_plant(CACTUS, $Cactus.global_position)
+			Main.add_plant('cactus')
 
 # How do we generalize this?
 func handle_flower(viewport, event, shape_index):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			spawn_new_plant(FLOWER, $Flower.global_position)
+			Main.add_plant('flower')
 
 func spawn_new_plant(scene, initial_position):
 	var new_plant = scene.instance()

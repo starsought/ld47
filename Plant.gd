@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
-# plant selector
-# also have to deal with large vs small hitboxes later on
+export (String) var type = 'cactus'
+
+onready var Main = $'..'  # big assumption here
 
 var being_dragged = false
 var drag_point_offset = Vector2()
@@ -13,20 +14,27 @@ func handle_input(viewport, event, shape_index):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			being_dragged = true
+			z_index = 1
 			drag_point_offset = get_viewport().get_mouse_position() - position
-		if event.button_index == BUTTON_RIGHT and event.pressed:
-			# temp: right click removes plant
-			# todo: drag plant to trash can?
-			self.queue_free()
 
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and not event.pressed:
-			being_dragged = false
-			drag_point_offset = Vector2()
+			if being_dragged:
+				being_dragged = false
+				z_index = 0
+				drag_point_offset = Vector2()
+				if destruction_zone(get_viewport().get_mouse_position()):
+					Main.remove_plant(type)
+					self.queue_free()
 
 func _physics_process(delta):
 	if being_dragged:
 		var mouse = get_viewport().get_mouse_position()
-		var movement = (mouse - drag_point_offset) - position
-		move_and_slide(movement/delta)
+		position = round_position(mouse - drag_point_offset)
+
+func destruction_zone(mouse):
+	return mouse.x > 256 or mouse.x < 0 or mouse.y > 512 or mouse.y < 0
+
+func round_position(p):
+	return (p/8).floor()*8

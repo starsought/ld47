@@ -10,6 +10,7 @@ extents = Vector2( 4, 8 )
 scale = Vector2( 2, 2 )
 input_pickable = true
 script = ExtResource( 2 )
+type = "flower"
 
 [node name="Art" type="Sprite" parent="."]
 texture = ExtResource( 1 )

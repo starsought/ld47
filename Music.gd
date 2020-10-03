@@ -6,19 +6,22 @@ extends Node
 const MIN_DB = -90.0
 const MAX_DB = 0.0
 
-var music_volume = 100  # percent
+var music_volume = 1.0
 
 onready var layers = {
 	'kick_2': $Kick2,
+	'chord_1': $Chord1,
 }
 
 var muted = {
 	'kick_2': true,
+	'chord_1': true,
 }
 
 
 func play():
 	for stream in layers.values():
+		stream.volume_db = MIN_DB
 		stream.play()
 
 func mute(l):
