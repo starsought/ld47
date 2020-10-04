@@ -22,12 +22,12 @@ var store = {
 	'sprout': 0,
 	'small_herbs': 100,
 	'big_herbs': 5000,
-	'ivy': 2500,
-	'cactus': 250,
-	'succulent': 1500,
+	'ivy': 2000,
+	'cactus': 1000,
+	'succulent': 5000,
 	'willow': 100,
-	'bonsai': 750,
-	'overgrown_planter': 200,
+	'bonsai': 1000,
+	'overgrown_planter': 500,
 }
 
 func _ready():

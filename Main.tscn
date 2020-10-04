@@ -87,10 +87,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -64.0
 margin_top = -24.0
+margin_right = -8.0
 custom_styles/focus = SubResource( 1 )
 custom_fonts/font = ExtResource( 8 )
 text = "Options"
 flat = true
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -377,13 +379,14 @@ __meta__ = {
 position = Vector2( -5, 10 )
 texture = ExtResource( 17 )
 
-[node name="ShopTitle" type="Label" parent="."]
+[node name="ShopTitle" type="Label" parent="Spawner"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -80.0
-margin_right = -16.0
-margin_bottom = 26.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = 24.0
+margin_top = -64.0
+margin_right = 88.0
+margin_bottom = -38.0
+rect_scale = Vector2( 0.25, 0.25 )
 custom_fonts/font = ExtResource( 21 )
 text = "Shop"
 align = 1
