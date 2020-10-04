@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://audio/cowbell.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -6,14 +6,20 @@
 [ext_resource path="res://Options.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Music.gd" type="Script" id=5]
 [ext_resource path="res://art/background.png" type="Texture" id=6]
+[ext_resource path="res://audio/chords.ogg" type="AudioStream" id=7]
 [ext_resource path="res://fonts/font_16.tres" type="DynamicFont" id=8]
 [ext_resource path="res://audio/shaker.ogg" type="AudioStream" id=9]
 [ext_resource path="res://art/plants.png" type="Texture" id=10]
 [ext_resource path="res://Spawner.gd" type="Script" id=11]
 [ext_resource path="res://audio/kick.ogg" type="AudioStream" id=12]
 [ext_resource path="res://audio/bass.ogg" type="AudioStream" id=13]
+[ext_resource path="res://audio/pedal.ogg" type="AudioStream" id=14]
+[ext_resource path="res://audio/snare.ogg" type="AudioStream" id=15]
 [ext_resource path="res://art/lock.png" type="Texture" id=16]
 [ext_resource path="res://art/notes.png" type="Texture" id=17]
+[ext_resource path="res://audio/melody.ogg" type="AudioStream" id=18]
+[ext_resource path="res://audio/harmony.ogg" type="AudioStream" id=19]
+[ext_resource path="res://audio/metronome.ogg" type="AudioStream" id=20]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -23,26 +29,39 @@ extents = Vector2( 8, 12 )
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
 
+[node name="Metronome" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+volume_db = -3.0
+
 [node name="Music" type="Node" parent="."]
 script = ExtResource( 5 )
-
-[node name="Kick" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 12 )
-
-[node name="Chord" type="AudioStreamPlayer" parent="Music"]
-
-[node name="Cowbell" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 1 )
-
-[node name="Shaker" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 9 )
 
 [node name="Bass" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 13 )
 
-[node name="Ding" type="AudioStreamPlayer" parent="Music"]
+[node name="Chords" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 7 )
 
-[node name="Clap" type="AudioStreamPlayer" parent="Music"]
+[node name="Cowbell" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 1 )
+
+[node name="Harmony" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 19 )
+
+[node name="Kick" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 12 )
+
+[node name="Melody" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 18 )
+
+[node name="Pedal" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 14 )
+
+[node name="Shaker" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 9 )
+
+[node name="Snare" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 15 )
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 6 )
@@ -69,9 +88,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Splash" parent="." instance=ExtResource( 3 )]
-visible = false
-
 [node name="Spawner" type="Node2D" parent="."]
 position = Vector2( 256, 128 )
 scale = Vector2( 2, 2 )
@@ -81,6 +97,7 @@ script = ExtResource( 11 )
 position = Vector2( 12, -44 )
 texture = ExtResource( 10 )
 vframes = 9
+hframes = 2
 
 [node name="Box" type="Area2D" parent="Spawner/P0"]
 
@@ -99,6 +116,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
 text = "$"
 align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -107,7 +125,8 @@ __meta__ = {
 position = Vector2( 32, -44 )
 texture = ExtResource( 10 )
 vframes = 9
-frame = 1
+hframes = 2
+frame = 2
 
 [node name="Box" type="Area2D" parent="Spawner/P1"]
 
@@ -126,6 +145,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
 text = "$"
 align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -134,7 +154,8 @@ __meta__ = {
 position = Vector2( 52, -44 )
 texture = ExtResource( 10 )
 vframes = 9
-frame = 2
+hframes = 2
+frame = 4
 
 [node name="Box" type="Area2D" parent="Spawner/P2"]
 
@@ -153,6 +174,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
 text = "$"
 align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -161,7 +183,8 @@ __meta__ = {
 position = Vector2( 12, -12 )
 texture = ExtResource( 10 )
 vframes = 9
-frame = 3
+hframes = 2
+frame = 6
 
 [node name="Box" type="Area2D" parent="Spawner/P3"]
 
@@ -188,7 +211,8 @@ __meta__ = {
 position = Vector2( 32, -12 )
 texture = ExtResource( 10 )
 vframes = 9
-frame = 4
+hframes = 2
+frame = 8
 
 [node name="Box" type="Area2D" parent="Spawner/P4"]
 
@@ -215,7 +239,8 @@ __meta__ = {
 position = Vector2( 52, -12 )
 texture = ExtResource( 10 )
 vframes = 9
-frame = 5
+hframes = 2
+frame = 10
 
 [node name="Box" type="Area2D" parent="Spawner/P5"]
 
@@ -242,7 +267,8 @@ __meta__ = {
 position = Vector2( 12, 20 )
 texture = ExtResource( 10 )
 vframes = 9
-frame = 6
+hframes = 2
+frame = 12
 
 [node name="Box" type="Area2D" parent="Spawner/P6"]
 
@@ -269,7 +295,8 @@ __meta__ = {
 position = Vector2( 32, 20 )
 texture = ExtResource( 10 )
 vframes = 9
-frame = 7
+hframes = 2
+frame = 14
 
 [node name="Box" type="Area2D" parent="Spawner/P7"]
 
@@ -296,7 +323,8 @@ __meta__ = {
 position = Vector2( 52, 20 )
 texture = ExtResource( 10 )
 vframes = 9
-frame = 8
+hframes = 2
+frame = 16
 
 [node name="Box" type="Area2D" parent="Spawner/P8"]
 
@@ -335,3 +363,8 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="Spawner/Money"]
 position = Vector2( -5, 10 )
 texture = ExtResource( 17 )
+
+[node name="Plants" type="YSort" parent="."]
+
+[node name="Splash" parent="." instance=ExtResource( 3 )]
+visible = false

@@ -2,6 +2,7 @@ extends Node2D
 
 const PLANT = preload("res://Plant.tscn")
 const OVERLAY_LOCKED = Color(0.5, 0.5, 0.5)
+const OVERLAY_AFFORDABLE = Color(0.75, 0.75, 0.75)
 const OVERLAY_UNLOCKED = Color(1, 1, 1)
 
 onready var Main = $".."
@@ -21,12 +22,12 @@ var store = {
 	'sprout': 0,
 	'small_herbs': 100,
 	'big_herbs': 5000,
-	'ivy': 200,
-	'cactus': 500,
-	'succulent': 250,
-	'willow': 500,
-	'bonsai': 1000,
-	'overgrown_planter': 2000,
+	'ivy': 2500,
+	'cactus': 250,
+	'succulent': 1500,
+	'willow': 100,
+	'bonsai': 750,
+	'overgrown_planter': 200,
 }
 
 func _ready():
@@ -50,6 +51,7 @@ func handle(v, input, i, type):
 				if Main.money >= store[type]:
 					Main.money -= store[type]
 					purchase(type)
+					spawn_new_plant(type)
 				else:
 					pass  # play a sound or something?
 
@@ -61,7 +63,7 @@ func spawn_new_plant(type):
 	new_plant.being_dragged = true
 	new_plant.drag_point_offset = get_viewport().get_mouse_position() - new_plant.position
 	new_plant.plink()
-	Main.add_child(new_plant)  # triggers _ready()
+	Main.get_node("Plants").add_child(new_plant)  # triggers _ready()
 	Main.add_plant_to_arrangement(new_plant)
 	
 func disable_spawner(type):
@@ -77,13 +79,21 @@ func update_store_display():
 		var cost = store[type]
 		var node = spawn_nodes[type]
 		if cost > 0:
-			node.self_modulate = OVERLAY_LOCKED
+			if cost <= Main.money:
+				node.self_modulate = OVERLAY_AFFORDABLE
+				node.get_node('Lock').modulate = OVERLAY_UNLOCKED
+			else:
+				node.self_modulate = OVERLAY_LOCKED
+				node.get_node('Lock').modulate = OVERLAY_LOCKED
 			node.get_node('Lock').show()
 			node.get_node('Lock/Price').text = str(cost)
 		else:
 			node.self_modulate = OVERLAY_UNLOCKED
 			node.get_node('Lock').hide()
-	$Money.text = str(Main.money)
+	if Main.money >= 1000000:
+		$Money.text = "MAX"
+	else:
+		$Money.text = str(Main.money)
 
 func unlocked(type):
 	return store[type] == 0

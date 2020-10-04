@@ -1,8 +1,5 @@
 extends Node
 
-# I think we need to store all the music here and deal with signals
-# so we don't have tons of overlapping stuff
-
 var time = 0.0
 
 const MIN_DB = -90.0
@@ -11,23 +8,27 @@ const MAX_DB = 0.0
 var music_volume = 1.0
 
 onready var layers = {
-	'kick': $Kick,
-	'cowbell': $Cowbell,
-	'shaker': $Shaker,
-	'chord': $Chord,
-	'ding': $Ding,
 	'bass': $Bass,
-	'clap': $Clap,
+	'chords': $Chords,
+	'cowbell': $Cowbell,
+	'harmony': $Harmony,
+	'kick': $Kick,
+	'melody': $Melody,
+	'pedal': $Pedal,
+	'shaker': $Shaker,
+	'snare': $Snare,
 }
 
 var muted = {
-	'kick': true,
-	'cowbell': true,
-	'shaker': true,
-	'chord': true,
-	'ding': true,
 	'bass': true,
-	'clap': true,
+	'chords': true,
+	'cowbell': true,
+	'harmony': true,
+	'kick': true,
+	'melody': true,
+	'pedal': true,
+	'shaker': true,
+	'snare': true,
 }
 
 
