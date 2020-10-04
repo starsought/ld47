@@ -130,6 +130,7 @@ func _input(event):
 				being_dragged = false
 				z_index = 0
 				drag_point_offset = Vector2()
+				# not sure if I like this
 #				if not said_hello:
 #					say(hello_messages[randi()%len(hello_messages)], 1.0)
 #					said_hello = true

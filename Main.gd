@@ -15,7 +15,7 @@ func _process(delta):
 			if spawned[type]:
 				var cycle = get_money_cycle(type)
 				var index = Timing.get_frame() % len(cycle)
-				money += cycle[index] * 10
+				money += cycle[index]
 		$Spawner/Money.text = str(money)
 		frame_count = Timing.get_frame()
 	$Spawner.update_store_display()

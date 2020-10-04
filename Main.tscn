@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://audio/cowbell.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -20,11 +20,18 @@
 [ext_resource path="res://audio/melody.ogg" type="AudioStream" id=18]
 [ext_resource path="res://audio/harmony.ogg" type="AudioStream" id=19]
 [ext_resource path="res://audio/metronome.ogg" type="AudioStream" id=20]
+[ext_resource path="res://fonts/font_32.tres" type="DynamicFont" id=21]
+[ext_resource path="res://fonts/m5x7.ttf" type="DynamicFontData" id=22]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 12 )
+
+[sub_resource type="DynamicFont" id=3]
+extra_spacing_top = -6
+extra_spacing_space = -2
+font_data = ExtResource( 22 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -203,6 +210,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
 text = "$"
 align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -231,6 +239,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
 text = "$"
 align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -259,6 +268,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
 text = "$"
 align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -287,6 +297,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
 text = "$"
 align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -315,6 +326,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
 text = "$"
 align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -343,18 +355,19 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
 text = "$"
 align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Money" type="Label" parent="Spawner"]
-margin_left = 8.0
+margin_left = 12.0
 margin_top = 52.0
-margin_right = 56.0
+margin_right = 60.0
 margin_bottom = 76.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
-text = "0000000"
+text = "00000"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -363,6 +376,56 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="Spawner/Money"]
 position = Vector2( -5, 10 )
 texture = ExtResource( 17 )
+
+[node name="ShopTitle" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -80.0
+margin_right = -16.0
+margin_bottom = 26.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 21 )
+text = "Shop"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JamZoneTitle" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -296.0
+margin_right = -136.0
+margin_bottom = 26.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 21 )
+text = "Jam Zone"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AFunnyJoke" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -384.0
+margin_top = 8.0
+margin_right = -128.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.576471, 0.556863, 0.603922, 1 )
+text = "keep your hands and feet safely within
+the jam zone at all times"
+align = 1
+valign = 2
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Plants" type="YSort" parent="."]
 
