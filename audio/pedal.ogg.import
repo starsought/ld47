@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pedal.ogg-2135ed4084fdab6bd5da0c10d5f88798.oggstr"
+
+[deps]
+
+source_file="res://audio/pedal.ogg"
+dest_files=[ "res://.import/pedal.ogg-2135ed4084fdab6bd5da0c10d5f88798.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

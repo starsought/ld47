@@ -1,47 +1,62 @@
 extends KinematicBody2D
 
-export (String) var type = 'cactus'
-
 const OVERLAY_CLEAR = Color(1.0, 1.0, 1.0)
 const OVERLAY_DELETE = Color(1.0, 0.0, 0.0)
-const OVERLAY_GRAB = Color(0.9, 0.9, 0.9)
-
-var frame = 0
-var track = 'kick_2'
+const OVERLAY_GRAB = Color(0.8, 0.8, 0.8)
+# todo: hover
 
 onready var Main = $'..'  # big assumption here
 
+
+var type = 'cactus'
+
 var being_dragged = false
 var drag_point_offset = Vector2()
+var said_hello = false
 
-var plant_type_data = {}
+# Plant Type Data
+func get_track():
+	match type:
+		'sprout': return 'shaker'
+		'small_herbs': return 'shaker'
+		'big_herbs': return 'chord'
+		'ivy': return 'cowbell'
+		'cactus': return 'bass'
+		'succulent': return 'kick'
+		'willow': return 'clap'
+		'bonsai': return 'kick'
+		'overgrown_planter': return 'kick'
 
-# we could just do the same collision for now
-func register_plant_type(type_id, frame, track, bounce_frames):
-	plant_type_data[type_id] = {}
-	plant_type_data[type_id]['frame'] = frame
-	plant_type_data[type_id]['track'] = track
-	plant_type_data[type_id]['bounce'] = bounce_frames
-	
+func get_base_frame():
+	match type:
+		'sprout': return 0
+		'small_herbs': return 1
+		'big_herbs': return 2
+		'ivy': return 3
+		'cactus': return 4
+		'succulent': return 5
+		'willow': return 6
+		'bonsai': return 7
+		'overgrown_planter': return 8
 
-func apply_type(t):
-	type = t
-	var type_data = plant_type_data[type]
-	frame = type_data['frame']
-	$Art.frame = frame
-	$Art.base = frame
-	for f in type_data['bounce']:
-		$Art.bounce_frames[f] = 1
-	track = type_data['track']
+func get_animation_cycle():
+	match type:
+		'sprout': return [0]
+		'small_herbs': return [0]
+		'big_herbs': return [0]
+		'ivy': return [0]
+		'cactus': return [1,0,0,0, 0,0,0,0, 0,0,1,0, 0,1,0,1]
+		'succulent': return [0]
+		'willow': return [0]
+		'bonsai': return [0]
+		'overgrown_planter': return [0]
+
+
 
 func _ready():
 	connect("input_event", self, "handle_input")
-	register_plant_type('cactus', 0, 'kick'   , [10, 13, 15])
-	register_plant_type('flower', 2, 'shaker' , [0, 2, 4, 6, 8, 10, 12, 14])
-	register_plant_type('borb'  , 4, 'cowbell', [0, 6])
-	register_plant_type('snake' , 6, 'ding', [0, 1, 2, 3, 8, 9, 10, 11])
-	register_plant_type('herbs' , 8, 'chord', [0, 1, 2, 3, 14])
-	$Plink.volume_db = -12.0
+	$Plink.volume_db = -12.0  # todo: sfx volume control
+	$Art.set_sprite_data(get_base_frame(), get_animation_cycle())
 
 func _process(delta):
 	$Art.animate(delta)
@@ -52,7 +67,8 @@ func handle_input(viewport, event, shape_index):
 			being_dragged = true
 			z_index = 1
 			drag_point_offset = get_viewport().get_mouse_position() - position
-			$Plink.play()
+			hide_text_bubble()
+			plink()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -61,7 +77,10 @@ func _input(event):
 				being_dragged = false
 				z_index = 0
 				drag_point_offset = Vector2()
-				$Plink.play()
+				if not said_hello:
+					say('hello')
+					said_hello = true
+				plink()
 				if touching_destruction_zone():
 					remove_from_arrangement()
 					self.queue_free()
@@ -70,7 +89,7 @@ func _physics_process(delta):
 	if being_dragged:
 		var mouse = get_viewport().get_mouse_position()
 		position = round_position(mouse - drag_point_offset)
-#		position.y = 192 - 24  # not sure if I like this or not
+
 		if touching_destruction_zone():
 			modulate = OVERLAY_DELETE
 		else:
@@ -92,3 +111,17 @@ func add_to_arrangement():
 
 func remove_from_arrangement():
 	Main.remove_plant_from_arrangement(self)
+
+
+
+func say(text):
+	$Bubble.show()
+	$Bubble/Text.text = text
+	$Bubble/Timer.connect("timeout", self, 'hide_text_bubble')
+	$Bubble/Timer.start(2.0)
+
+func hide_text_bubble():
+	$Bubble.hide()
+
+func plink():
+	$Plink.play()

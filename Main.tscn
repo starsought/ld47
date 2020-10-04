@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://audio/cowbell.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -6,15 +6,14 @@
 [ext_resource path="res://Options.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Music.gd" type="Script" id=5]
 [ext_resource path="res://art/background.png" type="Texture" id=6]
-[ext_resource path="res://audio/clap.ogg" type="AudioStream" id=7]
 [ext_resource path="res://fonts/font_16.tres" type="DynamicFont" id=8]
 [ext_resource path="res://audio/shaker.ogg" type="AudioStream" id=9]
 [ext_resource path="res://art/plants.png" type="Texture" id=10]
 [ext_resource path="res://Spawner.gd" type="Script" id=11]
 [ext_resource path="res://audio/kick.ogg" type="AudioStream" id=12]
 [ext_resource path="res://audio/bass.ogg" type="AudioStream" id=13]
-[ext_resource path="res://audio/chord.ogg" type="AudioStream" id=14]
-[ext_resource path="res://audio/ding.ogg" type="AudioStream" id=15]
+[ext_resource path="res://art/lock.png" type="Texture" id=16]
+[ext_resource path="res://art/notes.png" type="Texture" id=17]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -31,7 +30,6 @@ script = ExtResource( 5 )
 stream = ExtResource( 12 )
 
 [node name="Chord" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 14 )
 
 [node name="Cowbell" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 1 )
@@ -43,10 +41,8 @@ stream = ExtResource( 9 )
 stream = ExtResource( 13 )
 
 [node name="Ding" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 15 )
 
 [node name="Clap" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 7 )
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 6 )
@@ -81,61 +77,261 @@ position = Vector2( 256, 128 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 11 )
 
-[node name="Cactus" type="Sprite" parent="Spawner"]
-position = Vector2( 12, -12 )
+[node name="P0" type="Sprite" parent="Spawner"]
+position = Vector2( 12, -44 )
 texture = ExtResource( 10 )
-vframes = 5
-hframes = 2
+vframes = 9
 
-[node name="Box" type="Area2D" parent="Spawner/Cactus"]
+[node name="Box" type="Area2D" parent="Spawner/P0"]
 
-[node name="Collision" type="CollisionShape2D" parent="Spawner/Cactus/Box"]
+[node name="Collision" type="CollisionShape2D" parent="Spawner/P0/Box"]
 shape = SubResource( 2 )
 
-[node name="Flower" type="Sprite" parent="Spawner"]
-position = Vector2( 36, -44 )
+[node name="Lock" type="Sprite" parent="Spawner/P0"]
+texture = ExtResource( 16 )
+
+[node name="Price" type="Label" parent="Spawner/P0/Lock"]
+margin_left = -8.0
+margin_top = 4.0
+margin_right = 24.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P1" type="Sprite" parent="Spawner"]
+position = Vector2( 32, -44 )
 texture = ExtResource( 10 )
-vframes = 5
-hframes = 2
+vframes = 9
+frame = 1
+
+[node name="Box" type="Area2D" parent="Spawner/P1"]
+
+[node name="Collision" type="CollisionShape2D" parent="Spawner/P1/Box"]
+shape = SubResource( 2 )
+
+[node name="Lock" type="Sprite" parent="Spawner/P1"]
+texture = ExtResource( 16 )
+
+[node name="Price" type="Label" parent="Spawner/P1/Lock"]
+margin_left = -8.0
+margin_top = 4.0
+margin_right = 24.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P2" type="Sprite" parent="Spawner"]
+position = Vector2( 52, -44 )
+texture = ExtResource( 10 )
+vframes = 9
 frame = 2
 
-[node name="Box" type="Area2D" parent="Spawner/Flower"]
+[node name="Box" type="Area2D" parent="Spawner/P2"]
 
-[node name="Collision" type="CollisionShape2D" parent="Spawner/Flower/Box"]
+[node name="Collision" type="CollisionShape2D" parent="Spawner/P2/Box"]
 shape = SubResource( 2 )
 
-[node name="Borb" type="Sprite" parent="Spawner"]
-position = Vector2( 52, -12 )
+[node name="Lock" type="Sprite" parent="Spawner/P2"]
+texture = ExtResource( 16 )
+
+[node name="Price" type="Label" parent="Spawner/P2/Lock"]
+margin_left = -8.0
+margin_top = 4.0
+margin_right = 24.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P3" type="Sprite" parent="Spawner"]
+position = Vector2( 12, -12 )
 texture = ExtResource( 10 )
-vframes = 5
-hframes = 2
+vframes = 9
+frame = 3
+
+[node name="Box" type="Area2D" parent="Spawner/P3"]
+
+[node name="Collision" type="CollisionShape2D" parent="Spawner/P3/Box"]
+shape = SubResource( 2 )
+
+[node name="Lock" type="Sprite" parent="Spawner/P3"]
+texture = ExtResource( 16 )
+
+[node name="Price" type="Label" parent="Spawner/P3/Lock"]
+margin_left = -8.0
+margin_top = 4.0
+margin_right = 24.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P4" type="Sprite" parent="Spawner"]
+position = Vector2( 32, -12 )
+texture = ExtResource( 10 )
+vframes = 9
 frame = 4
 
-[node name="Box" type="Area2D" parent="Spawner/Borb"]
+[node name="Box" type="Area2D" parent="Spawner/P4"]
 
-[node name="Collision" type="CollisionShape2D" parent="Spawner/Borb/Box"]
+[node name="Collision" type="CollisionShape2D" parent="Spawner/P4/Box"]
 shape = SubResource( 2 )
 
-[node name="Snake" type="Sprite" parent="Spawner"]
-position = Vector2( 16, -44 )
+[node name="Lock" type="Sprite" parent="Spawner/P4"]
+texture = ExtResource( 16 )
+
+[node name="Price" type="Label" parent="Spawner/P4/Lock"]
+margin_left = -8.0
+margin_top = 4.0
+margin_right = 24.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P5" type="Sprite" parent="Spawner"]
+position = Vector2( 52, -12 )
 texture = ExtResource( 10 )
-vframes = 5
-hframes = 2
+vframes = 9
+frame = 5
+
+[node name="Box" type="Area2D" parent="Spawner/P5"]
+
+[node name="Collision" type="CollisionShape2D" parent="Spawner/P5/Box"]
+shape = SubResource( 2 )
+
+[node name="Lock" type="Sprite" parent="Spawner/P5"]
+texture = ExtResource( 16 )
+
+[node name="Price" type="Label" parent="Spawner/P5/Lock"]
+margin_left = -8.0
+margin_top = 4.0
+margin_right = 24.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P6" type="Sprite" parent="Spawner"]
+position = Vector2( 12, 20 )
+texture = ExtResource( 10 )
+vframes = 9
 frame = 6
 
-[node name="Box" type="Area2D" parent="Spawner/Snake"]
+[node name="Box" type="Area2D" parent="Spawner/P6"]
 
-[node name="Collision" type="CollisionShape2D" parent="Spawner/Snake/Box"]
+[node name="Collision" type="CollisionShape2D" parent="Spawner/P6/Box"]
 shape = SubResource( 2 )
 
-[node name="Herbs" type="Sprite" parent="Spawner"]
-position = Vector2( 36, -12 )
+[node name="Lock" type="Sprite" parent="Spawner/P6"]
+texture = ExtResource( 16 )
+
+[node name="Price" type="Label" parent="Spawner/P6/Lock"]
+margin_left = -8.0
+margin_top = 4.0
+margin_right = 24.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P7" type="Sprite" parent="Spawner"]
+position = Vector2( 32, 20 )
 texture = ExtResource( 10 )
-vframes = 5
-hframes = 2
+vframes = 9
+frame = 7
+
+[node name="Box" type="Area2D" parent="Spawner/P7"]
+
+[node name="Collision" type="CollisionShape2D" parent="Spawner/P7/Box"]
+shape = SubResource( 2 )
+
+[node name="Lock" type="Sprite" parent="Spawner/P7"]
+texture = ExtResource( 16 )
+
+[node name="Price" type="Label" parent="Spawner/P7/Lock"]
+margin_left = -8.0
+margin_top = 4.0
+margin_right = 24.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P8" type="Sprite" parent="Spawner"]
+position = Vector2( 52, 20 )
+texture = ExtResource( 10 )
+vframes = 9
 frame = 8
 
-[node name="Box" type="Area2D" parent="Spawner/Herbs"]
+[node name="Box" type="Area2D" parent="Spawner/P8"]
 
-[node name="Collision" type="CollisionShape2D" parent="Spawner/Herbs/Box"]
+[node name="Collision" type="CollisionShape2D" parent="Spawner/P8/Box"]
 shape = SubResource( 2 )
+
+[node name="Lock" type="Sprite" parent="Spawner/P8"]
+texture = ExtResource( 16 )
+
+[node name="Price" type="Label" parent="Spawner/P8/Lock"]
+margin_left = -8.0
+margin_top = 4.0
+margin_right = 24.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Money" type="Label" parent="Spawner"]
+margin_left = 8.0
+margin_top = 52.0
+margin_right = 56.0
+margin_bottom = 76.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "0000000"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Spawner/Money"]
+position = Vector2( -5, 10 )
+texture = ExtResource( 17 )

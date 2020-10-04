@@ -2,6 +2,5 @@
 
 [ext_resource path="res://fonts/m5x7.ttf" type="DynamicFontData" id=1]
 
-
 [resource]
 font_data = ExtResource( 1 )
